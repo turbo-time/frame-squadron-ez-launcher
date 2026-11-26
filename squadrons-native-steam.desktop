@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Squadrons VR (Steam Controller)
+Comment=Launch Squadrons in SteamVR with the Steam Controller as player one
+Exec=/home/deck/.local/bin/squadrons-steam-request steam
+Icon=steam
+Terminal=false
+Categories=Game;
