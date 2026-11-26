@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10151f">
+  <meta name="description" content="Install a one-button STAR WARS: Squadrons VR launcher for Steam Machine and Steam Frame.">
+  <title>Squadrons VR · Steam Machine + Frame</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10151f;
+      --panel: #171f2b;
+      --line: #2b3748;
+      --text: #f2f6fc;
+      --muted: #aab8cb;
+      --blue: #72c7ff;
+      --mint: #9ff2d1;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background: radial-gradient(ellipse at 48% -10%, #233e58 0, transparent 48%), var(--bg);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+    a { color: var(--blue); text-underline-offset: 0.2em; }
+    a:hover { color: #b8e5ff; }
+    .wrap { width: min(100% - 40px, 1040px); margin-inline: auto; }
+    header { padding: 24px 0; }
+    .brand { display: inline-flex; gap: 11px; align-items: center; color: var(--text); text-decoration: none; font-weight: 700; letter-spacing: 0.01em; }
+    .mark { display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid #447c9e; border-radius: 11px; color: var(--mint); background: #152b38; }
+    .hero { padding: clamp(42px, 8vw, 88px) 0 64px; }
+    .eyebrow { color: var(--mint); font-size: 0.82rem; font-weight: 750; letter-spacing: 0.13em; text-transform: uppercase; }
+    h1 { max-width: 780px; margin: 14px 0 20px; font-size: clamp(2.4rem, 6vw, 4.7rem); line-height: 1.04; letter-spacing: -0.045em; }
+    .lead { max-width: 690px; margin: 0; color: var(--muted); font-size: clamp(1.08rem, 2.3vw, 1.3rem); }
+    .install { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: stretch; max-width: 780px; margin-top: 34px; padding: 12px; border: 1px solid var(--line); border-radius: 16px; background: #0b1018cc; box-shadow: 0 18px 60px #0004; }
+    .command { display: flex; align-items: center; overflow-wrap: anywhere; min-height: 50px; padding: 10px 12px; color: #d7e6f4; font: 0.9rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    button { min-height: 50px; padding: 0 18px; border: 0; border-radius: 11px; color: #07141c; background: var(--mint); font: inherit; font-size: 0.96rem; font-weight: 750; cursor: pointer; }
+    button:hover { background: #c3ffe8; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+    .note { margin: 12px 0 0; color: var(--muted); font-size: 0.92rem; }
+    .note strong { color: var(--text); }
+    .section { padding: 28px 0 58px; }
+    h2 { margin: 0 0 20px; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.025em; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .step { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(150deg, #1a2634, #141b25); }
+    .step h3 { margin: 0 0 8px; font-size: 1.1rem; }
+    .step p { margin: 0; color: var(--muted); }
+    .step-number { display: inline-grid; width: 29px; height: 29px; margin-bottom: 18px; place-items: center; border: 1px solid #447c9e; border-radius: 9px; color: var(--blue); font-weight: 750; }
+    .details { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .detail { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+    .detail h3 { margin: 0 0 9px; font-size: 1.06rem; }
+    .detail p { margin: 0; color: var(--muted); }
+    .detail code { color: #d8f9eb; }
+    footer { padding: 24px 0 42px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.92rem; }
+    .footer-row { display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; }
+    #copy-status { min-height: 1.4em; margin: 8px 0 0; color: var(--mint); font-size: 0.92rem; }
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 28px, 1040px); }
+      .install { grid-template-columns: 1fr; }
+      button { width: 100%; }
+      .steps, .details { grid-template-columns: 1fr; }
+      .step { padding: 19px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a class="brand" href="#top" aria-label="Squadrons VR home"><span class="mark" aria-hidden="true">S</span><span>Squadrons VR launcher</span></a>
+  </header>
+  <main id="top">
+    <section class="hero wrap" aria-labelledby="title">
+      <div class="eyebrow">Steam Machine + Steam Frame</div>
+      <h1>Squadrons in VR.<br>One click to launch.</h1>
+      <p class="lead">Install two controller choices on the Steam Machine. Then stream from its Steam library to your Frame over Steam Remote Play.</p>
+      <div class="install" aria-label="Install command">
+        <code class="command" id="install-command">curl -fL https://raw.githubusercontent.com/turbo-time/frame-squadron-ez-launcher/main/install.sh -o /tmp/squadrons-install.sh &amp;&amp; bash /tmp/squadrons-install.sh</code>
+        <button id="copy-button" type="button">Copy install command</button>
+      </div>
+      <p id="copy-status" role="status" aria-live="polite"></p>
+      <p class="note"><strong>Run this on the Steam Machine.</strong> In Desktop Mode, open Konsole, paste the command, and press Enter. Review the <a href="https://github.com/turbo-time/frame-squadron-ez-launcher/blob/main/install.sh">installer source</a> first if you prefer.</p>
+    </section>
+
+    <section class="section wrap" aria-labelledby="steps-title">
+      <h2 id="steps-title">From install to flight</h2>
+      <div class="steps">
+        <article class="step"><span class="step-number">1</span><h3>Install on the Machine</h3><p>The installer adds both launcher choices to your Steam library. No password, SSH setup, or Frame-side install.</p></article>
+        <article class="step"><span class="step-number">2</span><h3>Choose your controller</h3><p>Pick <strong>Frame Controllers</strong> or <strong>Steam Controller</strong> before you start streaming.</p></article>
+        <article class="step"><span class="step-number">3</span><h3>Stream from the Frame</h3><p>Open the Machine's library on the Frame and select <strong>Stream</strong> on that launcher.</p></article>
+      </div>
+    </section>
+
+    <section class="section wrap" aria-labelledby="details-title">
+      <h2 id="details-title">Made for a clean handoff</h2>
+      <div class="details">
+        <article class="detail"><h3>Returns the TV to Steam</h3><p>If the Frame disconnects for 15 seconds, Squadrons gets a normal quit request. SteamVR closes when safe, returning the Machine to Steam Home.</p></article>
+        <article class="detail"><h3>Open and inspectable</h3><p>The installer and launcher scripts are in the public <a href="https://github.com/turbo-time/frame-squadron-ez-launcher">GitHub repository</a>. Everything installs in your user account; the installer does not need root access.</p></article>
+      </div>
+      <p class="note">Requires a SteamOS x86_64 host with Squadrons and SteamVR installed, and a Steam Frame paired for Remote Play. The installer detects the Frame and explains that no Frame-side install is needed.</p>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap footer-row"><span>Independent community project. Not affiliated with Valve or EA.</span><a href="https://github.com/turbo-time/frame-squadron-ez-launcher">View source and report an issue</a></div>
+  </footer>
+  <script>
+    const command = document.getElementById('install-command').textContent;
+    const status = document.getElementById('copy-status');
+    document.getElementById('copy-button').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(command);
+        status.textContent = 'Command copied. Paste it into Konsole on the Steam Machine.';
+      } catch {
+        status.textContent = 'Select and copy the command above, then paste it into Konsole on the Steam Machine.';
+      }
+    });
+  </script>
+</body>
+</html>

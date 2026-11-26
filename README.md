@@ -7,14 +7,26 @@ Launch STAR WARS: Squadrons in SteamVR on a Steam Machine and stream it to a Ste
 
 The Frame connects through its Steam Frame adapter and streams from the Machine's Steam library. The launcher does not require SSH between the devices.
 
+## Quick install
+
+On the Steam Machine, switch to Desktop Mode, open Konsole, and run:
+
+```sh
+curl -fL https://raw.githubusercontent.com/turbo-time/frame-squadron-ez-launcher/main/install.sh -o /tmp/squadrons-install.sh && bash /tmp/squadrons-install.sh
+```
+
+The installer checks for an x86_64 SteamOS host and the Python `aiohttp` module, installs the launcher into your user account, and registers both shortcuts with Steam. On the Steam Frame it exits with a note that no local install is needed. Read [install.sh](install.sh) before running it.
+
+The setup page is published at <https://turbo-time.github.io/frame-squadron-ez-launcher/>.
+
 ## Requirements
 
 - Steam Machine running SteamOS in Gaming Mode, with Squadrons and SteamVR installed in the default Steam library.
 - Steam Frame paired with the Machine in Steam Remote Play, and the Frame's VR streaming/link connection working.
 - Python 3 and `aiohttp` available on the Machine for controller selection.
-- A SteamOS account whose home directory is `/home/deck` (the desktop shortcuts use that standard SteamOS path).
+- A SteamOS account with a writable home directory.
 
-## Install on the Steam Machine
+## Manual install
 
 Copy the four programs into the Machine user's local bin directory:
 
@@ -26,7 +38,14 @@ install -m 755 squadrons-select-controller.py ~/.local/bin/squadrons-select-cont
 install -m 755 squadrons-game-quit.py ~/.local/bin/squadrons-game-quit
 ```
 
-Add `squadrons-native-frame.desktop` and `squadrons-native-steam.desktop` to Steam as non-Steam games on the Machine. In Steam, use **Add a Game → Add a Non-Steam Game**, browse to each desktop file, and add them. The shortcuts use `/home/deck/.local/bin/squadrons-steam-request`.
+Install the two `.desktop` files to `~/.local/share/applications`, then register them with `steamos-add-to-steam`:
+
+```sh
+install -Dm 644 squadrons-native-frame.desktop ~/.local/share/applications/squadrons-native-frame.desktop
+install -Dm 644 squadrons-native-steam.desktop ~/.local/share/applications/squadrons-native-steam.desktop
+steamos-add-to-steam ~/.local/share/applications/squadrons-native-frame.desktop
+steamos-add-to-steam ~/.local/share/applications/squadrons-native-steam.desktop
+```
 
 On the Frame, open the Machine's library entry and choose **Stream** for the desired shortcut. This uses Steam's normal Remote Play controls and does not install a launcher on the Frame.
 

@@ -2,7 +2,7 @@
 Type=Application
 Name=Squadrons VR (Frame Controllers)
 Comment=Launch Squadrons in SteamVR with the Frame controllers as player one
-Exec=/home/deck/.local/bin/squadrons-steam-request frame
+Exec=/usr/bin/bash -lc "$HOME/.local/bin/squadrons-steam-request frame"
 Icon=steam
 Terminal=false
 Categories=Game;
